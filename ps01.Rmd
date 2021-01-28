@@ -1,0 +1,63 @@
+---
+title: "PS1"
+author: "Alex Przybycin"
+date: "1/24/2021"
+output: word_document
+---
+
+##Question 1
+
+Top row- linear regeression, less complex, more variance, high bias
+
+Bottom row- more complex, lower variance, lower bias
+
+##Question 2
+
+
+##Question 3
+
+Inflexible model would be better 
+
+##Question 4
+Predictors large, small sample size, 
+
+##Question 5
+When relationship between the predictors and response is highly non-linear, the flexible model would be a better fit. 
+
+#Question 6
+Trying to minimize MSE in attempt to find a perfect fit will lead to over generalization/over fitting
+
+##Question 7
+Create & plot 2 bootstrapped samples manually without using boot(), drop NA's 
+Borrow code from 1/19 class 
+///
+anes <- read_scv_here %>%
+select(ftoabama, fttrump) %>%
+mutateftobama = replaceftobama, ftobama == 998, NA), 
+////
+library(tidyverse)
+library(here)
+anes <- read_csv(here("data", "anes_2016.csv"))
+anes_small <- subset(anes, select = c(ftobama, fttrump))
+summary(anes_small)
+
+anes_small$ftobama <- replace(anes_small$ftobama, anes_small$ftobama == 998, NA)
+anes_small$fttrump <- replace(anes_small$fttrump, anes_small$fttrump == 998, NA)
+summary(anes_small)
+
+anes_small <- drop_na(anes_small)
+///
+boot.samples=matrix(sample(anes_short$ftobama, size=B*n,replace=True),B,n)
+///
+
+
+##Question 9
+median(short_anes$ftobama)
+
+bs_1_obama <- as.data.frame(bs_1_obama)
+
+ggplot() +
+  geom_line(data = anes_small, aes(x = ftobama), stat = "density") +
+  geom_line(data = bs_1_obama, aes(x = bs_1_obama), stat = "density", color = "red") + 
+
+  theme_minimal()
